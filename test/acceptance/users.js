@@ -2,7 +2,7 @@
 
 'use strict';
 
-process.env.DB   = 'template-test';
+process.env.DB   = 'facebook-test';
 
 var expect  = require('chai').expect,
     cp      = require('child_process'),
@@ -28,13 +28,99 @@ describe('users', function(){
     });
   });
 
-  describe('get /register', function(){
-    it('should show the register page', function(done){
+  describe('get /profile/edit', function(){
+    it('should show the edit profile page', function(done){
       request(app)
-      .get('/register')
+      .get('/profile/edit')
+      .set('cookie', cookie)
       .end(function(err, res){
         expect(res.status).to.equal(200);
-        expect(res.text).to.include('Register');
+        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('Email');
+        expect(res.text).to.include('Phone');
+        done();
+      });
+    });
+  });
+
+  describe('put /profile', function(){
+    it('should edit profile page', function(done){
+      request(app)
+      .post('/profile')
+      .send('_method=put&visible=public&email=bob%40aol.com&photo=photo+url&tagline=bobs+stuff&facebook=facebook+url&twitter=twitter+url&phone=888+888+8888')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/profile');
+        done();
+      });
+    });
+  });
+
+  describe('get /profile', function(){
+    it('should edit profile page', function(done){
+      request(app)
+      .get('/profile')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('Email');
+        expect(res.text).to.include('Phone');
+        expect(res.text).to.include('Twitter');
+        done();
+      });
+    });
+  });
+
+  describe('get /users', function(){
+    it('should edit profile page', function(done){
+      request(app)
+      .get('/users')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('bob@aol.com');
+        expect(res.text).to.include('sue@aol.com');
+        expect(res.text).to.not.include('harry@aol.com');
+        expect(res.text).to.not.include('larry@aol.com');
+        done();
+      });
+    });
+  });
+
+  describe('get /users/sue@aol.com', function(){
+    it('should show user page', function(done){
+      request(app)
+      .get('/users/sue@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(200);
+        expect(res.text).to.include('sue@aol.com');
+        done();
+      });
+    });
+
+    it('should redirect when user/:id is private', function(done){
+      request(app)
+      .get('/users/harry@aol.com')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users');
+        done();
+      });
+    });
+  });
+
+  describe('post /message/000000000000000000000002', function(){
+    it('should send a user a message', function(done){
+      request(app)
+      .post('/message/000000000000000000000002')
+      .send('mtype=text&message=yo')
+      .set('cookie', cookie)
+      .end(function(err, res){
+        expect(res.status).to.equal(302);
+        expect(res.headers.location).to.equal('/users/sue@aol.com');
         done();
       });
     });

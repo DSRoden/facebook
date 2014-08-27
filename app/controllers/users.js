@@ -41,3 +41,40 @@ exports.authenticate = function(req, res){
   });
 };
 
+exports.edit = function(req, res){
+  res.render('users/edit');
+};
+
+exports.update = function(req, res){
+  User.update(req.body, res.locals.user, function(){
+    res.redirect('/profile');
+  });
+};
+
+exports.show = function(req, res){
+  res.render('users/show');
+};
+
+exports.index = function(req, res){
+  User.find({isVisible:true}, function(err, users){
+    res.render('users/index', {users:users});
+  });
+};
+
+exports.viewUser = function(req, res){
+  User.find({email: req.params.email}, function(err, client){
+    if(client[0].isVisible){
+      res.render('users/show-user', {client:client[0]});
+    } else {
+      res.redirect('/users');
+    }
+  });
+};
+
+exports.message = function(req, res){
+  User.findById(req.params.userId, function(err, receiver){
+    res.locals.user.send(receiver, req.body, function(){
+      res.redirect('/users/' + receiver.email);
+    });
+  });
+}

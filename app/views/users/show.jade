@@ -1,0 +1,19 @@
+extends ../shared/template
+block content
+  .row
+    .col-xs-6
+      img(src=user.photo)
+      h2 Email
+         .email= user.email
+      h2 Twitter
+        .twitter= user.twitter
+      h2 Facebook
+        .facebook= user.facebook
+      h2 Phone
+        .phone= user.phone
+      h2= user.isVisible ? 'public' : 'private'
+    .col-xs-6
+      a.btn.btn-primary(href='/profile/edit') EDIT
+
+block scripts
+
