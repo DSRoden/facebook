@@ -18,3 +18,5 @@ env:
     - secure: " Zt9L4pg2oiHyDJZOHQnxc1LbrmjyQrP7v2LrRQmgxqBFTdh5WIiXIOAGzy1lSvCm2+LhxFNyRQ7dOT3X7my32Xkb//nV629qcjrNYaRbHb9mcc6XaCeE9XK3jn7ovDYwhQKLxMWFRrqTk/0mUBzZHT2O/LG2FJVycG6v9lXiaaU="
     - secure: "JUTQQam/WwOAYxePUKD15OcA21MH3fZ+sny3ES8KL11XTLZ0x6yhSCaGliHhMujFBZda3SPvwWF2+0k3u4Z86hs9bzdxInhc0rqsvjs78ysOei2lSq/OklYdn9ePFg4sYAcxrvUsP3zWWEnMLhYpuQ42kWF2lxWNCt6zpSCz2SY="
     - secure: "kuiBjxu9x8sj97B6nBRsogUVT2sEsQr5AOOjgHGZQkRsIcD2PyyeMXLuNgEc+InUJI1IKahjMPqaXLYnLRLeZ9T5zO0zwI6vd7h28Q5O4c5umHMoWVPTOCVdQ/b7zubiH5CZST2OOPMLZx3FRpgBz0kuBHycOjZJxhhZI7b1W8U="
+    - secure: "FhyGatvmzxpgBmr8yMZw88fx5klYrz8a9vNSAY6Zvr6NcSzoiSfR9VY4zZFyYDtaXYx2UScizWrWVKmURX6Xsvw│ocal/git/bin:/usr/local/node/bin:/usr/local/redis/bin:/usr/
+      onlE99D1ucR/K3GXIV1Z90ZAz4eJUGt/9eEWjzR5VlXkgI/cHcf19K40ERn6AAgHDLvaAb7+mxIocwuLv/QI="
