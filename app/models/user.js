@@ -15,7 +15,7 @@ User.findById = function(id, cb){
   var _id = Mongo.ObjectID(id);
   User.collection.findOne({_id:_id}, function(err,obj){
     cb(err, _.create(User.prototype, obj));
-  })
+  });
 };
 
 User.register = function(o, cb){
@@ -36,14 +36,14 @@ User.authenticate = function(o, cb){
 };
 
 User.update = function(body, user, cb){
-    user.email = body.email;
-    user.photo = body.photo;
-    user.tagline = body.tagline;
-    user.facebook = body.facebook;
-    user.twitter = body.twitter;
-    user.phone = body.phone;
-    user.isVisible = body.visible === 'public';
-    User.collection.save(user, cb);
+  user.email = body.email;
+  user.photo = body.photo;
+  user.tagline = body.tagline;
+  user.facebook = body.facebook;
+  user.twitter = body.twitter;
+  user.phone = body.phone;
+  user.isVisible = body.visible === 'public';
+  User.collection.save(user, cb);
 };
 
 User.find = function(query, cb){
@@ -66,9 +66,10 @@ module.exports = User;
 //Private function
 
 function sendText(to, body, cb){
-  var accountSid = 'ACdc28f80c0320655a8e1b597556874f14',
-      authToken = process.env.TWILIO,
+  var accountSid = process.env.TWSID,
+      authToken = process.env.TWTOK,
+      from = process.env.FROM,
       client = require('twilio')(accountSid, authToken);
 
-  client.messages.create({to: to, from: '+18452336666', body: body}, cb);
+  client.messages.create({to: to, from: from, body: body}, cb);
 }

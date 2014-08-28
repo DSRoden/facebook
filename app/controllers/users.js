@@ -77,4 +77,4 @@ exports.message = function(req, res){
       res.redirect('/users/' + receiver.email);
     });
   });
-}
+};
