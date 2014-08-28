@@ -1,7 +1,6 @@
-## name of project
-### Code Badges
-build status icon
-coverage status icon
+FACEBOOK APP
+[![Build Status](https://travis-ci.org/DSRoden/facebook.svg?branch=master)](https://travis-ci.org/DSRoden/facebook)
+[![Coverage Status](https://img.shields.io/coveralls/DSRoden/facebook.svg)](https://coveralls.io/r/DSRoden/facebook?branch=master)
 
 ### About
 write a description about your project
