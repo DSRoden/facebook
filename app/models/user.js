@@ -2,7 +2,8 @@
 
 var bcrypt = require('bcrypt'),
     Mongo  = require('mongodb'),
-    _  = require('lodash');
+    _  = require('lodash'),
+    Mailgun = require('mailgun-js');
 
 function User(){
 }
@@ -56,6 +57,11 @@ User.prototype.send = function(receiver, obj, cb){
       sendText(receiver.phone, obj.message, cb);
       break;
     case 'email':
+      var data = {from: this.email,
+          to:receiver.email,
+          subject:'Message from'+ this.email,
+        html: obj.message};
+      sendEmail(data, cb);
       break;
     case 'internal':
   }
@@ -72,4 +78,13 @@ function sendText(to, body, cb){
       client = require('twilio')(accountSid, authToken);
 
   client.messages.create({to: to, from: from, body: body}, cb);
+}
+
+function sendEmail(data, cb){
+  var api_key  = process.env.MGUNAPI,
+      domain   = process.env.MGUNDOMAIN,
+      from = process.env.FROMEMAIL,
+      mailgun = new Mailgun({apiKey: api_key, domain: domain, from:from});
+
+  mailgun.messages().send(data, cb);
 }
